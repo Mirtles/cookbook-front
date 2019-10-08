@@ -1,10 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import LoginFormContainer from './components/LoginForm'
+
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Hello world!</Text>
+      <LoginFormContainer />
+      <Text style={{ color: 'white', backgroundColor: 'skyblue', height: 50 }}>Hello world!</Text>
     </View>
   );
 }
