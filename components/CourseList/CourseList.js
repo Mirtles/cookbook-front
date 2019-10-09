@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, FlatList } from 'react-native'
 
 export default class CourseList extends Component {
   constructor(props) {
@@ -11,7 +11,13 @@ export default class CourseList extends Component {
 
   render() {
     return <View>
-      <Text>courses</Text>
+      <Text>Recipe types:</Text>
+      <FlatList
+        data={this.props.courses}
+        renderItem={({ item }) => <Text>{item.name}</Text>}
+        keyExtractor={(item, index) => `item${item.id}`}
+      />
+
     </View>
   }
 }

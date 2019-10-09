@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, Text } from 'react-native'
+import { ScrollView, Text, StyleSheet } from 'react-native'
 
 import { getCourses } from '../../actions/courses'
 import CourseList from './CourseList'
@@ -18,15 +18,24 @@ class CourseListContainer extends Component {
   }
 
   render() {
-    return <View>
+    return <ScrollView>
       {this.props.courses.length === 0
-        ? <Text>"loading"</Text>
+        ? <Text style={styles.container}>"loading"</Text>
         : <CourseList
           courses={this.props.courses}
         />}
-    </View>
+    </ScrollView>
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+})
 
 const mapStateToProps = state => ({
   courses: state.courses
