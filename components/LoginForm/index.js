@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { Text, TextInput, View } from 'react-native'
+import { connect } from 'react-redux'
+import { Text, Button, TextInput, View } from 'react-native'
 
 import LoginForm from './LoginForm'
+import { login } from '../../actions/user'
 
-export default class LoginFormContainer extends Component {
+class LoginFormContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -27,18 +29,34 @@ export default class LoginFormContainer extends Component {
 
   onLogin = () => {
     const { name, password } = this.state
-
-    console.log(name, password)
+    this.props.login(name, password)
   }
 
   render() {
     return (
-      <LoginForm
-        text={this.state}
-        onChangeName={this.onChangeName}
-        onChangePassword={this.onChangePassword}
-        onLogin={this.onLogin}
-      />
+      <View>
+        <LoginForm
+          text={this.state}
+          onChangeName={this.onChangeName}
+          onChangePassword={this.onChangePassword}
+          onLogin={this.onLogin}
+        />
+        <Text>
+          {this.props.user ? this.props.user : "loading"}
+        </Text>
+      </View>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  };
+}
+
+const mapDispatchToProps = {
+  login,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginFormContainer)
