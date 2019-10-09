@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View } from 'react-native'
 
-import LoginForm from './LoginForm'
-import { login } from '../../actions/user'
+import url from '../../constants'
+import SignupForm from './SignupForm'
 
-class LoginFormContainer extends Component {
+class SignupFormContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -27,19 +27,35 @@ class LoginFormContainer extends Component {
     })
   }
 
-  onLogin = () => {
+  onSignup = () => {
     const { name, password } = this.state
-    this.props.login(name, password)
+
+    fetch(`${url}/user`, {
+      method: "POST",
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        password
+      })
+    })
+      .then(this.setState({
+        name: '',
+        password: '',
+      }))
+      .catch(console.error)
   }
 
   render() {
     return (
       <View>
-        <LoginForm
+        <SignupForm
           text={this.state}
           onChangeName={this.onChangeName}
           onChangePassword={this.onChangePassword}
-          onLogin={this.onLogin}
+          onSignup={this.onSignup}
         />
       </View>
     )
@@ -53,7 +69,6 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  login,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginFormContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(SignupFormContainer)

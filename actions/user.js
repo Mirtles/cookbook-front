@@ -23,4 +23,5 @@ export const login = (name, password) => dispatch => {
   })
     .then(res => res.json())
     .then(json => dispatch(loggedIn(json.jwt)))
+    .catch(console.error)
 }
