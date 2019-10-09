@@ -5,11 +5,13 @@ import { Provider } from "react-redux";
 import store from './store'
 import LoginFormContainer from './components/LoginForm'
 import SignupFormContainer from './components/SignupForm';
+import CourseListContainer from './components/CourseList';
 
 export default function App() {
   return (
     <Provider store={store}>
       <View style={styles.container}>
+        <CourseListContainer />
         <LoginFormContainer />
         <SignupFormContainer />
       </View>

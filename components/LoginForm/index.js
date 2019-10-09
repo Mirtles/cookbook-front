@@ -30,6 +30,10 @@ class LoginFormContainer extends Component {
   onLogin = () => {
     const { name, password } = this.state
     this.props.login(name, password)
+    this.setState({
+      name: '',
+      password: '',
+    })
   }
 
   render() {
