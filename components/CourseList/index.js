@@ -6,6 +6,10 @@ import { getCourses } from '../../actions/courses'
 import CourseList from './CourseList'
 
 class CourseListContainer extends Component {
+  static navigationOptions = {
+    title: 'Recipe types',
+  };
+
   constructor(props) {
     super(props);
 
