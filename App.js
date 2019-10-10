@@ -9,6 +9,7 @@ import LoginFormContainer from './components/LoginForm'
 import SignupFormContainer from './components/SignupForm';
 import CourseListContainer from './components/CourseList';
 import RecipeListContainer from './components/RecipeList'
+import RecipePageContainer from './components/RecipePage'
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -43,12 +44,15 @@ const AppNavigator = createStackNavigator(
     RecipeList: {
       screen: RecipeListContainer,
     },
+    RecipePage: {
+      screen: RecipePageContainer,
+    },
   },
   {
     initialRouteName: 'Home',
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: '#f4511e',
+        backgroundColor: 'midnightblue',
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
@@ -78,39 +82,3 @@ export default class App extends React.Component {
       </Provider >)
   }
 }
-
-// class DetailsScreen extends React.Component {
-//   static navigationOptions = ({ navigation }) => {
-//     return {
-//       title: navigation.getParam('otherParam', 'A Nested Details Screen'),
-//     };
-//   };
-
-//   render() {
-//     const { navigation } = this.props;
-//     return (
-//       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//         <Text>Details Screen</Text>
-//         <Text>
-//           itemId: {JSON.stringify(navigation.getParam('itemId', 'NO-ID'))}
-//         </Text>
-//         <Text>
-//           otherParam:
-//           {JSON.stringify(navigation.getParam('otherParam', 'default value'))}
-//         </Text>
-//         <Button
-//           title="Update the title"
-//           onPress={() => this.props.navigation.setParams({ otherParam: 'Updated!' })}
-//         />
-//         <Button
-//           title="Go to Details... again"
-//           onPress={() =>
-//             navigation.push('Details', {
-//               itemId: Math.floor(Math.random() * 100),
-//             })
-//           }
-//         />
-//       </View>
-//     );
-//   }
-// }

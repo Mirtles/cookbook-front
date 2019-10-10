@@ -12,7 +12,7 @@ export default class RecipeList extends Component {
         <FlatList
           data={this.props.recipes}
           renderItem={({ item }) => {
-            return <TouchableHighlight onPress={() => navigate('Home', {
+            return <TouchableHighlight onPress={() => navigate('RecipePage', {
               // id: item.id,
               // name: item.name,
               // title: `${item.name} recipes`,
