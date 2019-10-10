@@ -12,7 +12,7 @@ class LoginFormContainer extends Component {
     this.state = {
       name: '',
       password: '',
-      isLoggedIn: true,
+      isLoggedIn: false,
     };
   }
 

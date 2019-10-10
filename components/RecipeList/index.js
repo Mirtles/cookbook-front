@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import { View, Text, StyleSheet } from 'react-native'
 
-// import { getCourses } from '../../actions/courses'
-// import CourseList from './CourseList'
+import { getRecipes } from '../../actions/recipes'
 
-export default class RecipeListContainer extends Component {
-  static navigationOptions = {
-    title: `recipes`,
+class RecipeListContainer extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.getParam('title', 'Recipes'),
+    };
   };
 
   constructor(props) {
@@ -17,19 +18,34 @@ export default class RecipeListContainer extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   this.props.getCourses()
-  // }
+  componentDidMount() {
+    const { navigation } = this.props
+    const id = navigation.getParam('id', 'no id')
+    this.props.getRecipes(id, this.props.user)
+  }
 
   render() {
+    const { navigation } = this.props
     return <View>
       <Text>
-        hi
-        {/* id: {JSON.stringify(navigation.getParam('id', 'no id'))} */}
+        {navigation.getParam('name', 'no name')} dishes
       </Text>
       <Text>
-        {/* name: {JSON.stringify(navigation.getParam('name', 'no name'))} */}
+        {this.props.recipes.length === 0
+          ? "loading"
+          : this.props.recipes[0].name}
       </Text>
     </View>
   }
 }
+
+const mapStateToProps = state => ({
+  recipes: state.recipes,
+  user: state.user
+})
+
+const mapDispatchToProps = {
+  getRecipes,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RecipeListContainer)

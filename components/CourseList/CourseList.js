@@ -22,6 +22,7 @@ export default class CourseList extends Component {
             return <TouchableHighlight onPress={() => navigate('RecipeList', {
               id: item.id,
               name: item.name,
+              title: `${item.name} recipes`,
             })} >
               <Text style={text}>{item.name}</Text>
             </TouchableHighlight>
