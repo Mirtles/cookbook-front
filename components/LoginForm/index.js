@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View } from 'react-native'
+import { View, Button } from 'react-native'
 
 import LoginForm from './LoginForm'
 import { login } from '../../actions/user'
@@ -12,6 +12,7 @@ class LoginFormContainer extends Component {
     this.state = {
       name: '',
       password: '',
+      isLoggedIn: true,
     };
   }
 
@@ -33,18 +34,27 @@ class LoginFormContainer extends Component {
     this.setState({
       name: '',
       password: '',
+      isLoggedIn: true,
     })
   }
 
   render() {
+    console.log(this.props.navigation)
     return (
       <View>
-        <LoginForm
-          text={this.state}
-          onChangeName={this.onChangeName}
-          onChangePassword={this.onChangePassword}
-          onLogin={this.onLogin}
-        />
+        {!this.state.isLoggedIn
+          ? <LoginForm
+            text={this.state}
+            onChangeName={this.onChangeName}
+            onChangePassword={this.onChangePassword}
+            onLogin={this.onLogin}
+          />
+          : <Button
+            title="To recipes"
+            onPress={() => {
+              this.props.navigation.navigate('CourseList');
+            }}
+          />}
       </View>
     )
   }
