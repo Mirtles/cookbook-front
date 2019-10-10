@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { View, Text, StyleSheet } from 'react-native'
 
 import { getRecipes } from '../../actions/recipes'
+import RecipeList from './RecipeList'
 
 class RecipeListContainer extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -26,18 +27,39 @@ class RecipeListContainer extends Component {
 
   render() {
     const { navigation } = this.props
-    return <View>
-      <Text>
+    const { container, text } = styles
+    return <View style={container}>
+
+      <Text style={text}>
         {navigation.getParam('name', 'no name')} dishes
       </Text>
-      <Text>
-        {this.props.recipes.length === 0
-          ? "loading"
-          : this.props.recipes[0].name}
-      </Text>
+
+      {this.props.recipes.length === 0
+        ? <Text>loading</Text>
+        : <RecipeList
+          recipes={this.props.recipes}
+          navigation={this.props.navigation}
+          style={styles}
+        />}
+
     </View>
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  scrollView: {
+    marginHorizontal: 20,
+  },
+  text: {
+    fontSize: 30,
+  }
+})
 
 const mapStateToProps = state => ({
   recipes: state.recipes,
