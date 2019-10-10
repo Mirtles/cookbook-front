@@ -8,22 +8,25 @@ import store from './store'
 import LoginFormContainer from './components/LoginForm'
 import SignupFormContainer from './components/SignupForm';
 import CourseListContainer from './components/CourseList';
+import RecipeListContainer from './components/RecipeList'
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
     title: 'Login',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loggedIn: false
+    };
+  }
+
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <LoginFormContainer />
-        <Button
-          title="To recipes"
-          onPress={() => {
-            this.props.navigation.navigate('CourseList');
-          }}
-        />
+      <View style={styles.container}>
+        <LoginFormContainer navigation={this.props.navigation} />
       </View>
     );
   }
@@ -31,8 +34,15 @@ class HomeScreen extends React.Component {
 
 const AppNavigator = createStackNavigator(
   {
-    Home: HomeScreen,
-    CourseList: CourseListContainer,
+    Home: {
+      screen: HomeScreen,
+    },
+    CourseList: {
+      screen: CourseListContainer,
+    },
+    RecipeList: {
+      screen: RecipeListContainer,
+    },
   },
   {
     initialRouteName: 'Home',

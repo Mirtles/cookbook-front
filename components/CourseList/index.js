@@ -22,10 +22,12 @@ class CourseListContainer extends Component {
   }
 
   render() {
-    return <ScrollView>
+    return <ScrollView style={styles.scrollView}>
       {this.props.courses.length === 0
-        ? <Text style={styles.container}>"loading"</Text>
+        ? <Text style={styles.text}>"loading"</Text>
         : <CourseList
+          navigation={this.props.navigation}
+          style={styles}
           courses={this.props.courses}
         />}
     </ScrollView>
@@ -35,10 +37,16 @@ class CourseListContainer extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  scrollView: {
+    marginHorizontal: 20,
+  },
+  text: {
+    fontSize: 30,
+  }
 })
 
 const mapStateToProps = state => ({
