@@ -13,4 +13,4 @@ Cookbook is a place to store video recipes from Youtube. Users can sign up and l
 * Expo
 
 ## Server
-The backend can be founs [here](https://github.com/Mirtles/cookbook-back/)
+The backend can be found [here](https://github.com/Mirtles/cookbook-back/)
